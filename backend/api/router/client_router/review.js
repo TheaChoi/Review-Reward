@@ -49,7 +49,7 @@ router.post('/upload', upload.array('files'), (req, res) => {
   }
   const data = {
     "title": title,
-    "username": "GECL",
+    "username": "TheaChoi",
     "text": text,
     "star": star,
     "numItem": numItem,

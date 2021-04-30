@@ -8,7 +8,7 @@ const ReviewSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    default: "GECL"
+    default: "TheaChoi"
   },
   text: {
     type: String,

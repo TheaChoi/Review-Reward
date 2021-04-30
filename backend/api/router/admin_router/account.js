@@ -16,7 +16,7 @@ store.on('error', function(error) {
 });
 /* use session */
 router.use(session({
-  secret: 'geclkorea1$1$234',
+  secret: 'TheaChoi$1$234',
   resave: false,
   saveUninitialized: true,
   store: store

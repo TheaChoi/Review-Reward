@@ -61,6 +61,3 @@ cd backend/api `nodemon --watch app.js`
 **port: 4000**
 ***
 
-=======
-# GECL
-
