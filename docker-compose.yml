@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+    nginx:
+      image: nginx:latest
+      container_name: "nginx"
+      ports: 
+          - "80:80"
+      build: ./nginx
+
+    mongo:
+      image: mongo
+      container_name: "mongo"
+      restart: always
+      environment:
+        MONGO_INITDB_DATABASE: rr
+      command: 
+        mongod
+      ports:
+        - "17017:27017"
+      volumes: 
+        - /docker/data:/var/lib/mongo
+
+    client:
+      build:
+        context: ./frontend/client
+      container_name: client
+      restart: "on-failure"
+      ports:
+        - 3000:3000
+      volumes:
+        - /usr/src/rr/frontend/client/volumes
+      environment: 
+        - development
+      tty: true
+      command: npm start
+
+    admin:
+      build:
+        context: ./frontend/admin
+      container_name: admin
+      restart: "on-failure"
+      ports:
+        - 9000:9000
+      volumes:
+        - /usr/src/rr/frontend/admin/volumes
+      tty: true
+      command: npm start
+
+    api:
+      image: node:latest
+      container_name: "api"
+      build: 
+        context: ./backend/api
+      restart: always
+      volumes: 
+        - /usr/src/rr/backend/api/volumes
+      ports:
+        - 4000:4000
+      tty: true 
+      links:
+        - mongo
+      command: node app.js
